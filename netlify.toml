@@ -1,0 +1,22 @@
+# Netlify config for HH-URLS client sites
+# Pure static site — no build step needed
+[build]
+  publish = "."
+
+# Cache the config JSON for 1 minute so edits deploy fast but browsers don't hammer it
+[[headers]]
+  for = "/site.config.json"
+  [headers.values]
+    Cache-Control = "public, max-age=60, stale-while-revalidate=3600"
+
+# Cache images aggressively
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+# HTML: no cache so template updates push through immediately
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

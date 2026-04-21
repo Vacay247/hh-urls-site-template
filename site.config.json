@@ -1,0 +1,108 @@
+{
+  "name": "Sample Business",
+  "tagline": "A great place",
+  "concept": "A local favorite",
+  "location": "Hua Hin, Thailand",
+  "phone": "",
+  "hours": [
+    { "days": "Mon — Fri", "open": "09:00", "close": "21:00" },
+    { "days": "Sat — Sun", "open": "10:00", "close": "22:00" }
+  ],
+
+  "palette": {
+    "primary":   "#C8102E",
+    "secondary": "#1A1F3A",
+    "accent":    "#5EBDA0",
+    "cream":     "#FFF4E6",
+    "ink":       "#1A1A1A"
+  },
+
+  "socials": {
+    "instagram": "",
+    "facebook":  "",
+    "tiktok":    "",
+    "line":      ""
+  },
+
+  "reviews": {
+    "google_maps_url":  "",
+    "tripadvisor_url":  "",
+    "google_rating":    null,
+    "google_count":     null
+  },
+
+  "hero": {
+    "image":       "images/hero.jpg",
+    "overline":    "",
+    "headline_1":  "SAMPLE",
+    "headline_2":  "BUSINESS",
+    "tagline":     "A great place in Hua Hin",
+    "sub":         "Quality · Service · Value"
+  },
+
+  "gallery": [
+    "images/gallery-1.jpg",
+    "images/gallery-2.jpg",
+    "images/gallery-3.jpg"
+  ],
+
+  "menu": {
+    "sections": [
+      {
+        "title_en": "Signature",
+        "title_th": "",
+        "items": [
+          { "name_en": "Sample item", "name_th": "", "price_thb": 100, "note": "" }
+        ]
+      }
+    ]
+  },
+
+  "menu_foot_en": "",
+  "menu_foot_th": "",
+
+  "i18n": {
+    "enabled": true,
+    "default": "en",
+    "strings": {
+      "en": {
+        "directions": "DIRECTIONS",
+        "cta_menu":   "See the menu",
+        "cta_visit":  "Hours & map",
+        "joint_kicker": "The space",
+        "joint_h":    "Step inside",
+        "joint_lede": "Come and see what we're about.",
+        "menu_kicker":"What we serve",
+        "menu_h":     "The menu",
+        "menu_lede":  "Tap a section to expand.",
+        "visit_kicker":"Find us",
+        "visit_h":    "Come visit",
+        "rev_kicker": "What people say",
+        "rev_h":      "Customer reviews",
+        "rev_lede":   "Read what our customers are saying.",
+        "bb_call":    "Call",
+        "bb_dir":     "Directions",
+        "bb_menu":    "Menu"
+      },
+      "th": {
+        "directions": "นำทาง",
+        "cta_menu":   "ดูเมนู",
+        "cta_visit":  "เวลาและแผนที่",
+        "joint_kicker":"บรรยากาศร้าน",
+        "joint_h":    "เข้ามาดูร้านของเรา",
+        "joint_lede": "แวะเข้ามาเยี่ยมชมร้านของเรา",
+        "menu_kicker":"เมนูของเรา",
+        "menu_h":     "เมนู",
+        "menu_lede":  "แตะที่หมวดเพื่อขยาย",
+        "visit_kicker":"หาเรา",
+        "visit_h":    "มาเยี่ยมร้าน",
+        "rev_kicker": "ลูกค้าพูดถึงเรา",
+        "rev_h":      "รีวิวจากลูกค้า",
+        "rev_lede":   "อ่านรีวิวจากลูกค้าของเรา",
+        "bb_call":    "โทร",
+        "bb_dir":     "นำทาง",
+        "bb_menu":    "เมนู"
+      }
+    }
+  }
+}

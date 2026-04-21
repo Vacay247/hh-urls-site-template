@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#C8102E" id="theme-color">
+<title>Loading...</title>
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="images/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏪%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    /* Defaults — overridden from site.config.json at runtime */
+    --primary:#C8102E; --primary-dark:#8B0A1F;
+    --cream:#FFF4E6; --secondary:#1A1F3A; --accent:#5EBDA0;
+    --ink:#1A1A1A; --muted:#6B6B6B; --chrome:#E8E8E8;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Sarabun",sans-serif;
+    color:var(--ink);background:var(--cream);line-height:1.5;
+    padding-bottom:calc(72px + var(--safe-bottom));
+  }
+  html[lang="th"] body{font-family:"Sarabun","Noto Sans Thai",-apple-system,sans-serif}
+  img{max-width:100%;display:block}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:var(--secondary);color:var(--cream);
+    padding:calc(12px + var(--safe-top)) 14px 12px;
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.25);
+  }
+  .topbar .logo{font-family:"Arial Black",Impact,sans-serif;letter-spacing:1.5px;font-size:16px;flex-shrink:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .logo span{color:var(--primary)}
+  .lang-toggle{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:3px;font-size:11px;font-weight:700;flex-shrink:0}
+  .lang-toggle button{background:transparent;border:0;color:var(--cream);opacity:.6;padding:6px 10px;border-radius:999px;cursor:pointer;font:inherit;transition:all .15s}
+  .lang-toggle button.active{background:var(--primary);opacity:1}
+  .lang-toggle.hidden{display:none}
+  .topbar .open-btn{background:var(--primary);color:var(--cream);border:0;border-radius:999px;font:600 11px/1 -apple-system,sans-serif;letter-spacing:1px;padding:8px 12px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+
+  .hero{
+    position:relative;
+    min-height:calc(100vh - 60px - var(--safe-top));
+    max-height:820px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    color:var(--cream);overflow:hidden;background:var(--secondary);
+  }
+  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.55) saturate(1.1)}
+  .hero .content{position:relative;padding:24px 20px 32px}
+  .hero h1{font-family:"Arial Black",Impact,sans-serif;font-size:clamp(48px, 14vw, 80px);line-height:.9;letter-spacing:2px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+  html[lang="th"] .hero h1{font-size:clamp(40px, 11vw, 68px);letter-spacing:0}
+  .hero h1 .line2{color:var(--primary);display:block}
+  .hero .tag{font-style:italic;font-size:18px;margin-top:12px;color:var(--accent);text-shadow:0 2px 10px rgba(0,0,0,.6)}
+  .hero .sub{font-size:11px;letter-spacing:3px;margin-top:10px;opacity:.9;font-weight:600;text-transform:uppercase}
+  html[lang="th"] .hero .sub{letter-spacing:1px;text-transform:none;font-size:13px}
+  .hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+  .hero-ctas a{display:flex;align-items:center;justify-content:center;padding:16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+  html[lang="th"] .hero-ctas a{text-transform:none;letter-spacing:0}
+  .hero-ctas .primary{background:var(--primary);color:var(--cream)}
+  .hero-ctas .primary:active{background:var(--primary-dark)}
+  .hero-ctas .secondary{background:rgba(255,244,230,.15);color:var(--cream);backdrop-filter:blur(10px)}
+
+  section{padding:48px 20px}
+  .kicker{color:var(--primary);font-weight:700;letter-spacing:2.5px;font-size:11px;text-transform:uppercase;margin-bottom:6px}
+  html[lang="th"] .kicker{letter-spacing:1px;text-transform:none;font-size:13px}
+  h2{font-family:"Arial Black",Impact,sans-serif;font-size:32px;letter-spacing:1.5px;color:var(--secondary);margin-bottom:12px;line-height:1.1}
+  html[lang="th"] h2{letter-spacing:0;font-size:28px}
+  .lede{color:var(--muted);font-size:15px;margin-bottom:24px}
+
+  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 0 8px;margin:0 -20px;padding-left:20px;padding-right:20px;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery img{flex:0 0 78%;max-width:320px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;scroll-snap-align:start;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+
+  .menu-block{background:#fff;border-radius:14px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow:hidden}
+  .menu-block summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:"Arial Black",Impact,sans-serif;letter-spacing:2px;color:var(--primary);font-size:16px}
+  html[lang="th"] .menu-block summary{letter-spacing:0;font-size:17px}
+  .menu-block summary::-webkit-details-marker{display:none}
+  .menu-block summary::after{content:"+";font-size:28px;font-weight:300;color:var(--secondary);transition:transform .2s;line-height:1}
+  .menu-block[open] summary::after{transform:rotate(45deg)}
+  .menu-block .inner{padding:0 20px 18px}
+  .menu-block .note{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:10px}
+  .menu-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:15px;border-top:1px solid #F5E9D9}
+  .menu-item:first-child{border-top:0}
+  .menu-item .name{color:var(--secondary);font-weight:500;flex:1}
+  .menu-item .price{color:var(--primary);font-weight:700;white-space:nowrap}
+  .menu-item .price::after{content:" ฿";font-size:12px;opacity:.6}
+  .menu-foot{text-align:center;font-size:13px;color:var(--muted);font-style:italic;padding:16px 20px;background:var(--cream);border-radius:10px;margin-top:12px}
+
+  .visit{background:var(--secondary);color:var(--cream);padding:48px 20px}
+  .visit h2{color:var(--cream)}
+  .visit .kicker{color:var(--accent)}
+  .visit .row{display:flex;align-items:center;gap:14px;padding:18px 16px;background:rgba(255,255,255,.05);border-left:3px solid var(--primary);border-radius:0 10px 10px 0;margin-bottom:10px;text-decoration:none;color:var(--cream);min-height:64px}
+  .visit .row .ico{font-size:24px;width:36px;text-align:center;flex-shrink:0}
+  .visit .row .t{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;text-transform:uppercase}
+  html[lang="th"] .visit .row .t{letter-spacing:0;text-transform:none;font-size:13px}
+  .visit .row .v{font-size:15px;margin-top:2px}
+  .visit .row .v em{color:var(--muted);font-style:normal;font-size:13px}
+
+  .reviews{display:flex;flex-direction:column;gap:12px}
+  .review-card{display:flex;align-items:center;gap:14px;background:#fff;padding:18px;border-radius:12px;text-decoration:none;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.06);min-height:80px}
+  .review-card .stars{color:#FFB400;font-size:22px;letter-spacing:-1px;width:120px;flex-shrink:0;line-height:1}
+  .review-card .info{flex:1;min-width:0}
+  .review-card .src{font-family:"Arial Black",Impact,sans-serif;letter-spacing:2px;color:var(--secondary);font-size:14px}
+  .review-card .sub{font-size:13px;color:var(--muted);margin-top:2px}
+  .review-card .go{color:var(--primary);font-size:20px;flex-shrink:0}
+
+  .bottombar{position:fixed;bottom:0;left:0;right:0;z-index:60;background:#fff;border-top:1px solid var(--chrome);padding:10px 12px calc(10px + var(--safe-bottom));display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+  .bottombar a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;text-decoration:none;font-size:10px;letter-spacing:1px;font-weight:700;text-transform:uppercase;color:var(--secondary);border-radius:10px}
+  html[lang="th"] .bottombar a{letter-spacing:0;text-transform:none;font-size:11px}
+  .bottombar a .ico{font-size:22px;line-height:1}
+  .bottombar a.call{background:var(--primary);color:var(--cream)}
+  .bottombar a:active{transform:scale(.97)}
+
+  footer{background:#0E1224;color:var(--cream);text-align:center;padding:30px 20px;font-size:11px;letter-spacing:2px;line-height:1.8}
+  footer a{color:var(--accent);text-decoration:none;margin:0 6px}
+
+  @media (min-width: 720px){
+    section{max-width:900px;margin:0 auto;padding:70px 32px}
+    .hero .content{max-width:900px;margin:0 auto;padding:40px 32px 48px;width:100%}
+    .hero-ctas{max-width:420px}
+    h2{font-size:44px}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;margin:0;padding:0}
+    .gallery img{flex:none;max-width:none;aspect-ratio:1}
+    .menu-block summary{font-size:20px}
+    .menu-item{font-size:16px}
+    .topbar{padding:16px 32px}
+    .bottombar{display:none}
+    body{padding-bottom:0}
+  }
+
+  .skeleton{padding:48px 20px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo" id="brand-logo">LOADING</div>
+  <div class="lang-toggle hidden" id="lang-toggle" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="active">EN</button>
+    <button type="button" data-lang="th">ไทย</button>
+  </div>
+  <a href="#visit" class="open-btn" id="directions-btn" data-i18n="directions">DIRECTIONS</a>
+</header>
+
+<section class="hero" style="padding:0" id="hero">
+  <div class="bg" id="hero-bg"></div>
+  <div class="content">
+    <h1 id="hero-h1"></h1>
+    <div class="tag" id="hero-tag"></div>
+    <div class="sub" id="hero-sub"></div>
+    <div class="hero-ctas">
+      <a href="#menu" class="primary" data-i18n="cta_menu">See the menu</a>
+      <a href="#visit" class="secondary" data-i18n="cta_visit">Hours &amp; map</a>
+    </div>
+  </div>
+</section>
+
+<section id="gallery-section">
+  <div class="kicker" data-i18n="joint_kicker">The space</div>
+  <h2 data-i18n="joint_h">Step inside</h2>
+  <p class="lede" data-i18n="joint_lede">Come and see what we're about.</p>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<section id="menu">
+  <div class="kicker" data-i18n="menu_kicker">What we serve</div>
+  <h2 data-i18n="menu_h">The menu</h2>
+  <p class="lede" data-i18n="menu_lede">Tap a section to expand.</p>
+  <div id="menu-content"></div>
+  <p class="menu-foot" id="menu-foot"></p>
+</section>
+
+<section id="visit" class="visit">
+  <div class="kicker" data-i18n="visit_kicker">Find us</div>
+  <h2 data-i18n="visit_h">Come visit</h2>
+  <div id="visit-rows"></div>
+</section>
+
+<section id="reviews-section">
+  <div class="kicker" data-i18n="rev_kicker">What people say</div>
+  <h2 id="reviews-h" data-i18n="rev_h">Customer reviews</h2>
+  <p class="lede" data-i18n="rev_lede">Read what our customers are saying.</p>
+  <div class="reviews" id="reviews"></div>
+</section>
+
+<footer id="footer"></footer>
+
+<nav class="bottombar" aria-label="Quick actions" id="bottombar"></nav>
+
+<script>
+(async function(){
+  const cfg = await fetch('site.config.json').then(r => r.json());
+
+  // --- Apply palette to CSS variables ---
+  const root = document.documentElement;
+  const p = cfg.palette || {};
+  if (p.primary)   root.style.setProperty('--primary', p.primary);
+  if (p.secondary) root.style.setProperty('--secondary', p.secondary);
+  if (p.accent)    root.style.setProperty('--accent', p.accent);
+  if (p.cream)     root.style.setProperty('--cream', p.cream);
+  if (p.ink)       root.style.setProperty('--ink', p.ink);
+  if (p.primary) document.getElementById('theme-color').setAttribute('content', p.primary);
+
+  // --- Page meta ---
+  document.title = cfg.name + (cfg.tagline ? ' — ' + cfg.tagline : '');
+  document.querySelector('meta[name="description"]').setAttribute('content', cfg.concept || '');
+  document.querySelector('meta[property="og:title"]').setAttribute('content', cfg.name || '');
+  document.querySelector('meta[property="og:description"]').setAttribute('content', cfg.tagline || '');
+  if (cfg.hero?.image) document.querySelector('meta[property="og:image"]').setAttribute('content', cfg.hero.image);
+
+  // --- Brand logo in top bar ---
+  const nameParts = (cfg.name || '').split(' ');
+  const logoHtml = nameParts.length > 1
+    ? nameParts.slice(0, -1).join(' ') + ' <span>' + nameParts.slice(-1) + '</span>'
+    : cfg.name;
+  document.getElementById('brand-logo').innerHTML = logoHtml.toUpperCase();
+
+  // --- Hero ---
+  if (cfg.hero?.image) {
+    document.getElementById('hero-bg').style.backgroundImage = `url('${cfg.hero.image}')`;
+  }
+  const h1el = document.getElementById('hero-h1');
+  if (cfg.hero?.headline_1 || cfg.hero?.headline_2) {
+    h1el.innerHTML = (cfg.hero.headline_1 || '') +
+      (cfg.hero.headline_2 ? `<br><span class="line2">${cfg.hero.headline_2}</span>` : '');
+  } else {
+    h1el.textContent = cfg.name || '';
+  }
+  document.getElementById('hero-tag').textContent = cfg.hero?.tagline || cfg.tagline || '';
+  document.getElementById('hero-sub').textContent = cfg.hero?.sub || '';
+
+  // --- Gallery ---
+  const galleryEl = document.getElementById('gallery');
+  (cfg.gallery || []).forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `${cfg.name} photo ${i + 1}`;
+    img.loading = 'lazy';
+    galleryEl.appendChild(img);
+  });
+  if (!cfg.gallery?.length) {
+    document.getElementById('gallery-section').style.display = 'none';
+  }
+
+  // --- Menu ---
+  const menuEl = document.getElementById('menu-content');
+  const menuSections = cfg.menu?.sections || [];
+  menuSections.forEach((section, idx) => {
+    const details = document.createElement('details');
+    details.className = 'menu-block';
+    if (idx === 0) details.setAttribute('open', '');
+    const summary = document.createElement('summary');
+    summary.setAttribute('data-menu-title-en', section.title_en || '');
+    summary.setAttribute('data-menu-title-th', section.title_th || section.title_en || '');
+    summary.textContent = section.title_en || '';
+    details.appendChild(summary);
+    const inner = document.createElement('div');
+    inner.className = 'inner';
+    if (section.note_en || section.note_th) {
+      const p = document.createElement('p');
+      p.className = 'note';
+      p.setAttribute('data-note-en', section.note_en || '');
+      p.setAttribute('data-note-th', section.note_th || section.note_en || '');
+      p.textContent = section.note_en || '';
+      inner.appendChild(p);
+    }
+    (section.items || []).forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'menu-item';
+      row.innerHTML = `<span class="name" data-item-en="${escape_html(item.name_en || '')}" data-item-th="${escape_html(item.name_th || item.name_en || '')}">${escape_html(item.name_en || '')}</span><span class="price">${item.price_thb ?? ''}</span>`;
+      inner.appendChild(row);
+    });
+    details.appendChild(inner);
+    menuEl.appendChild(details);
+  });
+  if (!menuSections.length) {
+    document.getElementById('menu').style.display = 'none';
+  }
+  const footEl = document.getElementById('menu-foot');
+  footEl.setAttribute('data-foot-en', cfg.menu_foot_en || '');
+  footEl.setAttribute('data-foot-th', cfg.menu_foot_th || cfg.menu_foot_en || '');
+  footEl.textContent = cfg.menu_foot_en || '';
+  if (!cfg.menu_foot_en) footEl.style.display = 'none';
+
+  // --- Visit rows ---
+  const visitEl = document.getElementById('visit-rows');
+  const mapsQuery = encodeURIComponent(cfg.name + ' ' + (cfg.location || ''));
+  const mapsUrl = cfg.reviews?.google_maps_url || `https://maps.google.com/?q=${mapsQuery}`;
+  if (cfg.location) {
+    visitEl.insertAdjacentHTML('beforeend', `
+      <a class="row" href="${mapsUrl}" target="_blank" rel="noopener">
+        <div class="ico">📍</div>
+        <div>
+          <div class="t" data-i18n="v_loc_t">Location</div>
+          <div class="v">${escape_html(cfg.location)}</div>
+        </div>
+      </a>`);
+  }
+  if (cfg.phone) {
+    visitEl.insertAdjacentHTML('beforeend', `
+      <a class="row" href="tel:${cfg.phone.replace(/\s/g, '')}">
+        <div class="ico">📞</div>
+        <div>
+          <div class="t" data-i18n="v_call_t">Call</div>
+          <div class="v">${escape_html(cfg.phone)}</div>
+        </div>
+      </a>`);
+  }
+  if (cfg.hours?.length) {
+    const hoursHtml = cfg.hours.map(h => `${escape_html(h.days)} ${h.open}–${h.close}`).join(' · ');
+    visitEl.insertAdjacentHTML('beforeend', `
+      <div class="row" style="cursor:default">
+        <div class="ico">🕐</div>
+        <div>
+          <div class="t" data-i18n="v_hrs_t">Hours</div>
+          <div class="v">${hoursHtml}</div>
+        </div>
+      </div>`);
+  }
+  if (cfg.socials?.facebook) {
+    visitEl.insertAdjacentHTML('beforeend', `
+      <a class="row" href="https://www.facebook.com/${cfg.socials.facebook}" target="_blank" rel="noopener">
+        <div class="ico">👍</div>
+        <div><div class="t">Facebook</div><div class="v">@${cfg.socials.facebook}</div></div>
+      </a>`);
+  }
+  if (cfg.socials?.instagram) {
+    const ig = cfg.socials.instagram.replace(/^@/, '');
+    visitEl.insertAdjacentHTML('beforeend', `
+      <a class="row" href="https://www.instagram.com/${ig}" target="_blank" rel="noopener">
+        <div class="ico">📸</div>
+        <div><div class="t">Instagram</div><div class="v">@${ig}</div></div>
+      </a>`);
+  }
+
+  // --- Reviews ---
+  const revEl = document.getElementById('reviews');
+  if (cfg.reviews?.google_rating && cfg.reviews?.google_count) {
+    document.getElementById('reviews-h').textContent =
+      `${cfg.reviews.google_rating} stars on Google`;
+  }
+  if (cfg.reviews?.google_maps_url) {
+    revEl.insertAdjacentHTML('beforeend', reviewCard(
+      '★★★★★', 'GOOGLE',
+      cfg.reviews.google_rating ? `${cfg.reviews.google_rating} / 5 · ${cfg.reviews.google_count || ''} reviews` : 'Read reviews',
+      cfg.reviews.google_maps_url
+    ));
+  }
+  if (cfg.reviews?.tripadvisor_url) {
+    revEl.insertAdjacentHTML('beforeend', reviewCard(
+      '★★★★★', 'TRIPADVISOR', 'Traveler reviews', cfg.reviews.tripadvisor_url
+    ));
+  }
+  if (!revEl.children.length) {
+    document.getElementById('reviews-section').style.display = 'none';
+  }
+
+  // --- Footer ---
+  const fb = cfg.socials?.facebook ? `<a href="https://www.facebook.com/${cfg.socials.facebook}">FACEBOOK</a>` : '';
+  const ig = cfg.socials?.instagram ? `<a href="https://www.instagram.com/${cfg.socials.instagram.replace(/^@/,'')}">INSTAGRAM</a>` : '';
+  document.getElementById('footer').innerHTML =
+    `© ${new Date().getFullYear()} ${cfg.name.toUpperCase()} · ${cfg.location || ''}<br>${fb}${fb && ig ? ' · ' : ''}${ig}`;
+
+  // --- Bottom bar ---
+  const bb = document.getElementById('bottombar');
+  if (cfg.phone) {
+    bb.insertAdjacentHTML('beforeend', `
+      <a href="tel:${cfg.phone.replace(/\s/g, '')}" class="call">
+        <span class="ico">📞</span><span data-i18n="bb_call">Call</span>
+      </a>`);
+  }
+  bb.insertAdjacentHTML('beforeend', `
+    <a href="${mapsUrl}" target="_blank" rel="noopener">
+      <span class="ico">📍</span><span data-i18n="bb_dir">Directions</span>
+    </a>`);
+  bb.insertAdjacentHTML('beforeend', `
+    <a href="#menu"><span class="ico">🍽️</span><span data-i18n="bb_menu">Menu</span></a>`);
+  if (bb.children.length < 3) bb.style.gridTemplateColumns = `repeat(${bb.children.length}, 1fr)`;
+
+  // --- i18n ---
+  const i18n = cfg.i18n || { enabled: false };
+  const strings = i18n.strings || {};
+  const toggle = document.getElementById('lang-toggle');
+  function applyLang(lang){
+    const dict = strings[lang] || strings.en || {};
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-menu-title-en]').forEach(el => {
+      el.textContent = lang === 'th' ? el.dataset.menuTitleTh : el.dataset.menuTitleEn;
+    });
+    document.querySelectorAll('[data-note-en]').forEach(el => {
+      el.textContent = lang === 'th' ? el.dataset.noteTh : el.dataset.noteEn;
+    });
+    document.querySelectorAll('[data-item-en]').forEach(el => {
+      el.textContent = lang === 'th' ? el.dataset.itemTh : el.dataset.itemEn;
+    });
+    const foot = document.getElementById('menu-foot');
+    if (foot.dataset.footEn) foot.textContent = lang === 'th' ? foot.dataset.footTh : foot.dataset.footEn;
+    toggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('site_lang', lang); } catch(e){}
+  }
+  if (i18n.enabled) {
+    toggle.classList.remove('hidden');
+    const saved = (function(){ try { return localStorage.getItem('site_lang'); } catch(e){ return null; }})();
+    const browserThai = (navigator.language || '').toLowerCase().startsWith('th');
+    applyLang(saved || (browserThai ? 'th' : (i18n.default || 'en')));
+    toggle.querySelectorAll('button').forEach(b =>
+      b.addEventListener('click', () => applyLang(b.dataset.lang)));
+  }
+
+  function reviewCard(stars, src, sub, url){
+    return `<a href="${url}" target="_blank" rel="noopener" class="review-card">
+      <div class="stars">${stars}</div>
+      <div class="info"><div class="src">${src}</div><div class="sub">${escape_html(sub)}</div></div>
+      <div class="go">›</div>
+    </a>`;
+  }
+  function escape_html(s){
+    return String(s).replace(/[&<>"']/g, c =>
+      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+})();
+</script>
+
+</body>
+</html>
