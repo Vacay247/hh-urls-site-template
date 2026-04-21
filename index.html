@@ -322,6 +322,15 @@
           <div class="v">${hoursHtml}</div>
         </div>
       </div>`);
+  } else if (cfg.hours_text) {
+    visitEl.insertAdjacentHTML('beforeend', `
+      <div class="row" style="cursor:default">
+        <div class="ico">🕐</div>
+        <div>
+          <div class="t" data-i18n="v_hrs_t">Hours</div>
+          <div class="v">${escape_html(cfg.hours_text)}</div>
+        </div>
+      </div>`);
   }
   if (cfg.socials?.facebook) {
     visitEl.insertAdjacentHTML('beforeend', `
